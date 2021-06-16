@@ -1,4 +1,11 @@
-<!DOCTYPE html>
+
+
+<?php
+	$x = 0;
+	$y = 0;
+?>
+
+
 <html lang="pt-br">
 
 <head>
@@ -89,3 +96,5 @@
 </body>
 
 </html>
+
+
