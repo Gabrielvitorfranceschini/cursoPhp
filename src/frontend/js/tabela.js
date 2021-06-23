@@ -21,7 +21,7 @@ $(document).ready(function () {
 				dataDaTarefa: $("#dataDaTarefa").val(),
 			};
 
-			$.post( "test.php", dadosTarefaSubmit)
+			$.post( "../../backend/controllers/tarefasController.php", dadosTarefaSubmit)
 				.done(function( response ) {
 					
 					alert( "CallBack do DONE vinda do PHP (response): " + response );
