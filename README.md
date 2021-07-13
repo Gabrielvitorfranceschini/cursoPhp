@@ -27,3 +27,33 @@ git commit -m "
 ## comando para para mandar os arquivos par o git hub
 git push 
 
+## comando para ver se o apache esta rodando
+sudo service apache2 status
+exemplo: se nao estiver funcinado-* apache2 is not running
+
+
+## comando para ativar o apache
+sudo service apache2 start
+-Starting Apache httpd web server apache2
+
+
+## comando para parar o apache
+sudo service apache2 stop
+- * Stopping Apache httpd web server apache2 
+
+
+## comando para ver se o mysql esta funcionando 
+sudo service mysql status
+* MariaDB is stopped.
+
+## comando para ativar o mysql
+ sudo service mysql start
+ -* Starting MariaDB database server mysqld
+ 
+ 
+ ## comando para parar o mysql
+ sudo service mysql stop
+ -* Stopping MariaDB database server mysqld   
+
+
+
