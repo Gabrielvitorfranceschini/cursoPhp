@@ -37,7 +37,7 @@ class TarefaModel implements IBaseModel {
 				`prioridade` TINYINT NOT NULL,
 				`usuario` VARCHAR(50) DEFAULT NULL,
 				`descricao` TEXT DEFAULT NULL,
-				`data_criacao` TIMESTAMP DEFAULT NULL,
+				`data_criacao` TIMESTAMP,
 				`data_atualizacao` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 				`usuario_atualizacao` VARCHAR(50) DEFAULT NULL
 			) ENGINE=InnoDB DEFAULT CHARSET=utf8;"

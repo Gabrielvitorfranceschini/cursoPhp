@@ -43,6 +43,42 @@ $(document).ready(function () {
 		console.log("O botão clicado foi: ", $botaoEditar.text(), " valor: ", $botaoEditar.val());
 	});
 
+    $(".btnEditar").on("click", function () {
+		var $botaoEditar = $(this);
+
+		var id = $botaoEditar.val();
+
+		var url = "/tarefaController/listar/" + id;
+
+		$.get(url)
+	        .done(function (response) {
+				dadosTarefaEditar = response;
+
+				if (response && response.lenght > 0) {
+
+					$("#id").val(dadosTarefasEditar[0].id);
+					$("#titulo").val(dadosTarefasEditar[0].titulo);
+					$("#data_inicio").val(dadosTarefasEditar[0].data_inicio);
+					$("#data_fim").val(dadosTarefasEditar[0].data_fim);
+					$("#status").val(dadosTarefasEditar[0].status);
+					$("#prioridade").val(dadosTarefasEditar[0].prioridade);
+					$("#usuario").val(dadosTarefasEditar[0].usuario);
+					$("#descricao").val(dadosTarefasEditar[0].descricao);
+
+					// Exibir Modal
+					$(".modal").modal("show");
+				} else {
+					setarDadosEditarFalhou(response, "Tarefa não cadastrada.");
+				}	
+				
+			})
+			.fail(function (response) {
+				console.log("fail: " + response);
+				var msg = "CallBack do FAIL vinda do PHP (response): " + response;
+				alert(msg);
+			});
+
+
 	$('#idTabelaTarefas').on('click', '.btnExcluir', function (e) {
 		e.preventDefault();
 		var $botaoExcluir = $(this);
@@ -137,6 +173,25 @@ $(document).ready(function () {
 
 });
 
+    function setarDadosEditarFalhou(response, msg) {
+		console.log("fail: " + reponse);
+        
+		$("#id").val(0);
+		$("#titulo").val("");
+		$("#data_inicio").val("");
+		$("#data_fin").val("");
+		$("#status").val("");
+		$("#prioridade").val("");
+		$("#usuario").val("");
+		$("#descricao").val("");
+
+		//Fechar Modal
+		$(".modal").modal("hide");
+
+		alert(msg);
+	}
+});
+		
 /*
 	function dadosTabela() {
 		var dadosTarefa = [];
