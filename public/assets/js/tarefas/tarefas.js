@@ -76,13 +76,13 @@ $(document).ready(function () {
 	function montarCabecalhoTabela() {
 		var cabecalho = (
 			'<thead class="table-dark">' +
-				'<tr>' +
-					'<th scope="col">Id</th>' +
-					'<th scope="col">Tarefa</th>' +
-					'<th scope="col">Usuário</th>' +
-					'<th scope="col">Data</th>' +
-					'<th scope="col">Ações</th>' +
-				'</tr>' +
+			'<tr>' +
+			'<th scope="col">Id</th>' +
+			'<th scope="col">Tarefa</th>' +
+			'<th scope="col">Usuário</th>' +
+			'<th scope="col">Data</th>' +
+			'<th scope="col">Ações</th>' +
+			'</tr>' +
 			'</thead>'
 		);
 
