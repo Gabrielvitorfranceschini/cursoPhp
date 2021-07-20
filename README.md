@@ -6,7 +6,7 @@ ls -l
 
 
 ## comando para dar permissão na pasta (.) refesece ao diretorio atual onde eu estou 
-chmod 777 -R .
+sudo chmod 777 -R  .
 
 
 ## comando para mudar propetario da pasta e arquivos (usario) refese ao meu usario por exemplo gabriel (.) refesece ao diretorio atual onde eu estou 
