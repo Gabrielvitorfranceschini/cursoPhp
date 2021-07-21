@@ -25,22 +25,22 @@
 					<div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
 						<ul class="navbar-nav flex-grow-1">
 							<li class="nav-item">
-								<a class="nav-link text-dark"  href='home'><i class="fas fa-dna fa-1x"></i> C-Gemis</a>
+								<a class="nav-link text-dark" ><i class="fas fa-dna fa-1x"></i> C-Gemis</a>
 							</li>
 							<li class="nav-item">
-								<a class="nav-link text-dark"  href='tcga'><i class="fas fa-flask"></i> TCGA</a>
+								<a class="nav-link text-dark"  ><i class="fas fa-flask"></i> TCGA</a>
 							</li>
 							<li class="nav-item">
-								<a class="nav-link text-dark"  href='geo'><i class="fas fa-mortar-pestle"></i> GEO</a>
+								<a class="nav-link text-dark"  ><i class="fas fa-mortar-pestle"></i> GEO</a>
 							</li>
 							<li class="nav-item">
-								<a class="nav-link text-dark"  href='contact'><i class="fas fa-at"></i> Contact</a>
+								<a class="nav-link text-dark"  ><i class="fas fa-at"></i> Contact</a>
 							</li>
 							<li class="nav-item">
-								<a class="nav-link text-dark"  href='publications'><i class="fas fa-newspaper"></i> Publications</a>
+								<a class="nav-link text-dark"  ><i class="fas fa-newspaper"></i> Publications</a>
 							</li>
 							<li class="nav-item">
-								<a class="nav-link text-dark" href='about' ><i class="fas fa-address-card"></i> About</a>
+								<a class="nav-link text-dark"  ><i class="fas fa-address-card"></i> About</a>
 							</li>
 						</ul>
 					</div>

@@ -1,16 +1,22 @@
 $(document).ready(function () {
+	var timeout = 1000; // 1s (1000)
 	var tabelaTarefas = $("#idTabelaTarefas");
+
 	var dadosTarefasAtual = JSON.parse(paramPHP); // Inicializando com todos os dados vindos do PHP
 	montarTabela();
 
+	$(".btnCriarTarefa").on("click", function () {
+		limparFormulario();
+	});
+
 	$(".btnInserir").on("click", function () {
 
-		validarForm();
+		var temCamposInvalidos = false;// validarForm(true);
 
-		$("#formTarefas").submit(function (event) {
-			event.preventDefault();
+		if (!temCamposInvalidos) {
 
 			var dadosTarefa = {
+				id: $("#id").val(),
 				titulo: $("#titulo").val(),
 				data_inicio: $("#data_inicio").val(),
 				data_fim: $("#data_fim").val(),
@@ -20,83 +26,75 @@ $(document).ready(function () {
 				descricao: $("#descricao").val(),
 			};
 
-			var url = "/TarefaController/criar";
+			var url = "/TarefaController/criarOuAtualizar";
 
 			$.post(url, dadosTarefa)
 				.done(function (response) {
-					console.log("done: " + response);
-					var msg = "CallBack do DONE vinda do PHP (response): " + response;
+					exibirAviso("Tarefa cadastrada com sucesso.");
+					limparFormulario();
 				})
 				.fail(function (response) {
-					console.log("fail: " + response);
-					var msg = "CallBack do FAIL vinda do PHP (response): " + response;
-					alert(msg);
+					exibirAviso(response, "Erro ao salvar a tarefa.");
 				});
-		});
+		}
 
 	});
 
 
 	$(".btnEditar").on("click", function () {
 		var $botaoEditar = $(this);
-
-		console.log("O botão clicado foi: ", $botaoEditar.text(), " valor: ", $botaoEditar.val());
-	});
-
-    $(".btnEditar").on("click", function () {
-		var $botaoEditar = $(this);
-
 		var id = $botaoEditar.val();
+		var url = "/TarefaController/listar/" + id;
 
-		var url = "/tarefaController/listar/" + id;
+		$("#staticBackdropLabel").html("Editar tarefa");
 
 		$.get(url)
-	        .done(function (response) {
-				dadosTarefaEditar = response;
+			.done(function (response) {
 
-				if (response && response.lenght > 0) {
+				if (response && response.length > 0) {
 
-					$("#id").val(dadosTarefasEditar[0].id);
-					$("#titulo").val(dadosTarefasEditar[0].titulo);
-					$("#data_inicio").val(dadosTarefasEditar[0].data_inicio);
-					$("#data_fim").val(dadosTarefasEditar[0].data_fim);
-					$("#status").val(dadosTarefasEditar[0].status);
-					$("#prioridade").val(dadosTarefasEditar[0].prioridade);
-					$("#usuario").val(dadosTarefasEditar[0].usuario);
-					$("#descricao").val(dadosTarefasEditar[0].descricao);
+					$("#id").val(response[0].id);
+					$("#titulo").val(response[0].titulo);
+					$("#data_inicio").val(response[0].data_inicio);
+					$("#data_fim").val(response[0].data_fim);
+					$("#status").val(response[0].status);
+					$("#prioridade").val(response[0].prioridade);
+					$("#usuario").val(response[0].usuario);
+					$("#descricao").val(response[0].descricao);
 
 					// Exibir Modal
 					$(".modal").modal("show");
 				} else {
-					setarDadosEditarFalhou(response, "Tarefa não cadastrada.");
-				}	
-				
+					exibirAviso(response, "Tarefa não cadastrada.");
+					limparFormulario();
+				}
+
 			})
 			.fail(function (response) {
-				console.log("fail: " + response);
-				var msg = "CallBack do FAIL vinda do PHP (response): " + response;
-				alert(msg);
+				exibirAviso(response, "Erro ao obter a tarefa.");
+				limparFormulario();
 			});
 
+	});
 
 	$('#idTabelaTarefas').on('click', '.btnExcluir', function (e) {
 		e.preventDefault();
 		var $botaoExcluir = $(this);
-
+	
 		console.log("O botão clicado foi: ", $botaoExcluir.text(), " valor: ", $botaoExcluir.val());
-
+	
 		var novosDados = [];
-
+	
 		$.each(dadosTarefasAtual, function (idx, tarefa) {
 			if (tarefa.id != $botaoExcluir.val()) {
 				novosDados.push(tarefa);
 				// tarefa = { id: 3, nome: "tarefa1", usuario: "ariel", data: "18/05/2021" }
 			}
 		});
-
+	
 		dadosTarefasAtual = novosDados;
 		montarTabela();
-
+	
 		// $botaoExcluir.closest('tr').remove();
 	});
 
@@ -132,15 +130,15 @@ $(document).ready(function () {
 		$.each(tarefas, function (idx, tarefa) {
 			corpo += (
 				'<tr>' +
-					'<td>' + tarefa.id + '</td>' +
-					'<td>' + tarefa.titulo + '</td>' +
-					'<td>' + tarefa.usuario + '</td>' +
-					'<td>' + formatarDataHoraBr(tarefa.data_criacao) + '</td>' +
-					'<td>' +
-						'<button type="button" class="btn btn-warning btnEditar" value=' + tarefa.id + '><i class="far fa-edit"></i> Editar</button>' +
-						'&nbsp;' +
-						'<button type="button" class="btn btn-danger btnExcluir" value=' + tarefa.id + '><i class="far fa-trash-alt"></i> Excluir</button>' +
-					'</td>' +
+				'<td>' + tarefa.id + '</td>' +
+				'<td>' + tarefa.titulo + '</td>' +
+				'<td>' + tarefa.usuario + '</td>' +
+				'<td>' + formatarDataHoraBr(tarefa.data_criacao) + '</td>' +
+				'<td>' +
+				'<button type="button" class="btn btn-warning btnEditar" value=' + tarefa.id + '><i class="far fa-edit"></i> Editar</button>' +
+				'&nbsp;' +
+				'<button type="button" class="btn btn-danger btnExcluir" value=' + tarefa.id + '><i class="far fa-trash-alt"></i> Excluir</button>' +
+				'</td>' +
 				'</tr>'
 			);
 		});
@@ -151,8 +149,11 @@ $(document).ready(function () {
 	}
 
 	// Example starter JavaScript for disabling form submissions if there are invalid fields
-	function validarForm() {
+	function validarForm(returnValidation) {
 		'use strict'
+
+		returnValidation = returnValidation || false;
+		var temCamposInvalidos = false;
 
 		// Fetch all the forms we want to apply custom Bootstrap validation styles to
 		var forms = document.querySelectorAll('.needs-validation')
@@ -160,38 +161,55 @@ $(document).ready(function () {
 		// Loop over them and prevent submission
 		Array.prototype.slice.call(forms)
 			.forEach(function (form) {
-				form.addEventListener('submit', function (event) {
-					if (!form.checkValidity()) {
-						event.preventDefault()
-						event.stopPropagation()
-					}
 
-					form.classList.add('was-validated')
-				}, false)
-			})
+				var check = form.checkValidity();
+
+				if (!check) {
+					temCamposInvalidos = true;
+				} else {
+					form.classList.add('was-validated');
+				}
+
+			});
+
+		if (returnValidation) {
+			return temCamposInvalidos;
+		}
 	}
 
-});
+	function exibirAviso(response, msg) {
+		msg = msg || "";
+		response = response || "";
 
-    function setarDadosEditarFalhou(response, msg) {
-		console.log("fail: " + reponse);
-        
+		setTimeout(function () {
+			console.log("response: " + response);
+
+			// Fechar Modal
+			$(".modal").modal("hide");
+
+			if (msg) {
+				alert(msg);
+			}
+
+		}, timeout);
+
+	}
+
+	function limparFormulario() {
+		$("#staticBackdropLabel").html("Cadastrar tarefa");
+		//
 		$("#id").val(0);
 		$("#titulo").val("");
 		$("#data_inicio").val("");
-		$("#data_fin").val("");
+		$("#data_fim").val("");
 		$("#status").val("");
 		$("#prioridade").val("");
 		$("#usuario").val("");
 		$("#descricao").val("");
-
-		//Fechar Modal
-		$(".modal").modal("hide");
-
-		alert(msg);
 	}
+
 });
-		
+
 /*
 	function dadosTabela() {
 		var dadosTarefa = [];

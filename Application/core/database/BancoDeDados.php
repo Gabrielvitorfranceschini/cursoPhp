@@ -72,6 +72,10 @@ class BancoDeDados {
 
 		$obj = (object) $this->resultados;
 
+		if (isset($obj->scalar) && is_scalar($obj->scalar)){
+			return $obj->scalar;
+		}
+
 		while ($row = $obj->fetch_object()) {
 			$dados[] = $row;
 		}
