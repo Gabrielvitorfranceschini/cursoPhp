@@ -60,6 +60,7 @@ class BancoDeDados {
 				$this->nroDeLinhas = $this->resultados->num_rows;
 				$this->resultados = $this->prepararDadosRetorno();
 			}
+			
 			$this->resultados = $this->prepararDadosRetorno();
 		} catch (\Exception $error) {
 			echo $this->jsonException($error);
@@ -72,7 +73,7 @@ class BancoDeDados {
 
 		$obj = (object) $this->resultados;
 
-		if (isset($obj->scalar) && is_scalar($obj->scalar)){
+		if ($obj && isset($obj->scalar)) {
 			return $obj->scalar;
 		}
 

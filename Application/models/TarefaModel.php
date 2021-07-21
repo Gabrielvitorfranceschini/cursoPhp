@@ -50,14 +50,14 @@ class TarefaModel implements IBaseModel {
 
 	private function executar($sql) {
 		$this->bancoDeDados->executar($sql);
-
-		$dados = [];
+		
+		$retornoBanco  = $this->bancoDeDados->resultados;
 
 		if ($this->bancoDeDados->nroDeLinhas > 0) {
-			$dados = $this->bancoDeDados->resultados;
+			return $retornoBanco;
 		}
 
-		return $dados;
+		return $retornoBanco;
 	}
 
 	public function listarTodos() {
@@ -115,7 +115,7 @@ class TarefaModel implements IBaseModel {
 				id='5', titulo='Teste da tarefa ASDF',
 				data_inicio='2021-07-13', data_fim='2021-07-19',
 				status='5', prioridade='3', usuario='ariel.felippi',
-				descricao='Teste Tarefa. FFFFFFFFFFFFFFFFFFFFF'
+				descricao='Teste Tarefa.'
 			WHERE id= '5';"
 		*/
 
@@ -139,7 +139,8 @@ class TarefaModel implements IBaseModel {
 			$escaparHtml = ["descricao"];
 
 			if (in_array($field, $escaparHtml)) {
-				$value = htmlspecialchars($value, ENT_QUOTES);
+				$str = htmlspecialchars($value, ENT_QUOTES);
+				$value = sprintf("'%s'", $str);
 			}
 
 			$joined = ($field . "=" . $value);

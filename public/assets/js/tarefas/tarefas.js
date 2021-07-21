@@ -30,6 +30,11 @@ $(document).ready(function () {
 
 			$.post(url, dadosTarefa)
 				.done(function (response) {
+					if (response && response.length > 0) {
+						dadosTarefasAtual = response;
+						montarTabela();
+					}
+
 					exibirAviso("Tarefa cadastrada com sucesso.");
 					limparFormulario();
 				})

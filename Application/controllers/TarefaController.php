@@ -50,7 +50,16 @@ class TarefaController extends Controller implements IBaseController {
 	public function atualizar($dados = []) {
 		$this->validarTarefa($dados);
 
-		return $this->tarefasModel->atualizar($dados);
+		$id = $dados["id"];
+
+		$obj = $this->tarefasModel->atualizar($dados);
+
+		if ($obj) {
+			return $this->listar($id);
+		}
+
+		return $obj;
+
 	}
 
 	public function excluir($id = 0) {
