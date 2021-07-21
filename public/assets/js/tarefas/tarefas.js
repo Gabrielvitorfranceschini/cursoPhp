@@ -81,21 +81,19 @@ $(document).ready(function () {
 		e.preventDefault();
 		var $botaoExcluir = $(this);
 	
-		console.log("O botão clicado foi: ", $botaoExcluir.text(), " valor: ", $botaoExcluir.val());
+		var url = "/TarefaController/excluir/" + $botaoExcluir.val();
+
+			$.get(url)
+				.done(function (response) {
+					exibirAviso("tarefa excluida.");
+					limparFormulario();
+				})
+				.fail(function (response) {
+					exibirAviso(response, "Erro ao excluir");
+				});
+		
 	
-		var novosDados = [];
-	
-		$.each(dadosTarefasAtual, function (idx, tarefa) {
-			if (tarefa.id != $botaoExcluir.val()) {
-				novosDados.push(tarefa);
-				// tarefa = { id: 3, nome: "tarefa1", usuario: "ariel", data: "18/05/2021" }
-			}
-		});
-	
-		dadosTarefasAtual = novosDados;
-		montarTabela();
-	
-		// $botaoExcluir.closest('tr').remove();
+		 $botaoExcluir.closest('tr').remove();
 	});
 
 	function montarTabela() {
