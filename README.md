@@ -33,7 +33,7 @@ exemplo: se nao estiver funcinado-* apache2 is not running
 
 
 ## Comando para ativar o apache
-
+sudo service apache2 start
 
 ## Comando para ativar o localhost 
 php -S localhost:8080 -t public/
