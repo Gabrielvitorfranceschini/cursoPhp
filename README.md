@@ -1,40 +1,50 @@
-# cursoPhp
+## cursoPhp
 
 
-## comando para listar arquivos e diretorios 
+## Comando para listar arquivos e diretorios 
 ls -l 
 
 
-## comando para dar permissão na pasta (.) refesece ao diretorio atual onde eu estou 
+## Comando para dar permissão na pasta (.) refesece ao diretorio atual onde eu estou 
 sudo chmod 777 -R  .
 
 
-## comando para mudar propetario da pasta e arquivos (usario) refese ao meu usario por exemplo gabriel (.) refesece ao diretorio atual onde eu estou 
+## Comando para mudar propetario da pasta e arquivos (usario) refese ao meu usario por exemplo gabriel (.) refesece ao diretorio atual onde eu estou 
 chown usario:usario -R .
 
 
-## comando para baixar meu projeto (LINK DO GITUB)
+## Comando para baixar meu projeto (LINK DO GITUB)
 git clone LINK
 
 
-## comando para adicionar ao commit os arquivos que foram modificados (.) refesece ao diretorio atual onde eu estou
+## Comando para adicionar ao commit os arquivos que foram modificados (.) refesece ao diretorio atual onde eu estou
 git add .
 
-## comando para adicionar uma mensagem ao commit, exemplo "cursoPhp"
+## Comando para adicionar uma mensagem ao commit, exemplo "cursoPhp"
 git commit -m "
 
 
-## comando para para mandar os arquivos par o git hub
+## Comando para para mandar os arquivos par o git hub
 git push 
 
-## comando para ver se o apache esta rodando
+## Comando para ver se o apache esta rodando
 sudo service apache2 status
 exemplo: se nao estiver funcinado-* apache2 is not running
 
 
-## comando para ativar o apache
+## Comando para ativar o apache
+
+
+## Comando para ativar o localhost 
+php -S localhost:8080 -t public/
+
+
+## Entrar no mariaDB pelo vs code 
+sudo mysql -u root -p
 sudo service apache2 start
 -Starting Apache httpd web server apache2
+
+Para sair ctrl c
 
 
 ## comando para parar o apache
@@ -55,5 +65,9 @@ sudo service mysql status
  sudo service mysql stop
  -* Stopping MariaDB database server mysqld   
 
+## Para criar usuario maria db
+CREATE USER 'user1'@localhost IDENTIFIED BY 'password1';
 
+## Para dar todos os privilegios 
+GRANT ALL PRIVILEGES ON *.* TO 'user1'@localhost IDENTIFIED BY 'password1';
 
