@@ -1,5 +1,5 @@
 $(document).ready(function () {
-	var timeout = 1000; // 1s (1000)
+	var timeout = 600; // 1s (1000)
 	var tabelaTarefas = $("#idTabelaTarefas");
 
 	var dadosTarefasAtual = JSON.parse(paramPHP); // Inicializando com todos os dados vindos do PHP

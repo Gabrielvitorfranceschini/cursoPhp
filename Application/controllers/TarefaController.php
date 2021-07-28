@@ -44,7 +44,18 @@ class TarefaController extends Controller implements IBaseController {
 		unset($dados["id"]);
 		$this->validarTarefa($dados);
 
-		return $this->tarefasModel->criar($dados);
+		$retorno= $this->tarefasModel->criar($dados);
+		header('Content-Type: application/json; charset=utf-8');
+
+		if ($retorno) {
+			$dados = $this->tarefasModel->listarTodos();
+			echo json_encode($dados);
+			exit();
+		}
+
+		echo json_encode([]);
+		exit();
+	
 	}
 
 	public function atualizar($dados = []) {
