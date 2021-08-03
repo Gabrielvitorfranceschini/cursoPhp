@@ -69,5 +69,6 @@ sudo service mysql status
 CREATE USER 'user1'@localhost IDENTIFIED BY 'password1';
 
 ## Para dar todos os privilegios 
-GRANT ALL PRIVILEGES ON **.** TO 'user1'@localhost IDENTIFIED BY 'password1';
+GRANT ALL PRIVILEGES ON *.* TO 'user1'@localhost IDENTIFIED BY 'password1';
+botar os asteriscos no ponto
 
