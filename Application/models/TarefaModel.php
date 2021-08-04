@@ -35,7 +35,7 @@ class TarefaModel implements IBaseModel {
 				`data_fim` DATE DEFAULT '0001-01-01',
 				`status` TINYINT NOT NULL,
 				`prioridade` TINYINT NOT NULL,
-				`usuario` VARCHAR(50) DEFAULT NULL,
+				`usuario` VARCHAR(150) DEFAULT NULL,
 				`descricao` TEXT DEFAULT NULL,
 				`data_criacao` TIMESTAMP,
 				`data_atualizacao` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
