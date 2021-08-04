@@ -72,3 +72,16 @@ CREATE USER 'user1'@localhost IDENTIFIED BY 'password1';
 GRANT ALL PRIVILEGES ON *.* TO 'user1'@localhost IDENTIFIED BY 'password1';
 botar os asteriscos no ponto
 
+
+
+
+
+tabela usuarios
+id
+nome
+email
+usuario
+status
+//
+8data de criacao
+8data alteracao
